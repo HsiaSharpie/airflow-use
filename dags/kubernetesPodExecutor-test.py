@@ -15,7 +15,7 @@ with DAG(
     hello_task = KubernetesPodOperator(
         task_id="hello_k8s_pod",
         name="hello-k8s-pod",
-        namespace="default",
+        namespace="airflow",
         image="alpine:3.18",
         cmds=["sh", "-c"],
         arguments=["echo Hello from K8s Pod"],
