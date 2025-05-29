@@ -5,7 +5,6 @@ from datetime import datetime
 from airflow.kubernetes.secret import Secret
 
 
-# 把 Kubernetes Secret 的內容掛成環境變數
 aws_access_key_id_secret = Secret(
     deploy_type="env",              # 以環境變數形式掛載
     deploy_target="AWS_ACCESS_KEY_ID",  # 這是 Pod 內看到的變數名
@@ -31,7 +30,7 @@ with DAG(
         task_id="print-env",
         name="print-env",
         namespace="airflow",
-        image="test-env-image:0.0.1",
+        image="test-env-image:0.0.2",
         # image="python:3.9-slim",  # base image 就好
         # cmds=["sh", "-c"],
         # arguments=["echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY"],
