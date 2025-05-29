@@ -1,7 +1,7 @@
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
 from airflow.operators.bash import BashOperator
-from datetime import datetime
+from datetime import datetime, timedelta
 from airflow.kubernetes.secret import Secret
 
 
@@ -19,11 +19,17 @@ aws_secret_access_key_secret = Secret(
     key="AWS_SECRET_ACCESS_KEY",
 )
 
+default_args = {
+    "owner": "airflow",
+    "retries": 1,
+    "retry_delay": timedelta(minutes=1),
+}
 
 with DAG(
     dag_id="upload_s3",
+    default_args=default_args,
     start_date=datetime(2024, 1, 1),
-    schedule_interval=None,
+    schedule_interval="*/10 * * * *",
     catchup=False,
 ) as dag:
     upload_to_s3 = KubernetesPodOperator(
