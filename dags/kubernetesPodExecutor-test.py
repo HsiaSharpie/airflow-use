@@ -27,22 +27,17 @@ with DAG(
     schedule_interval=None,
     catchup=False,
 ) as dag:
-
     print_env = KubernetesPodOperator(
         task_id="print-env",
         name="print-env",
         namespace="airflow",
-        image="python:3.9-slim",  # base image 就好
+        image="test-env-image:latest",
+        # image="python:3.9-slim",  # base image 就好
         cmds=["sh", "-c"],
-        arguments=["echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY"],
+        # arguments=["echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY"],
         secrets=[aws_access_key_id_secret, aws_secret_access_key_secret],
         get_logs=True,
         is_delete_operator_pod=True,
     )
 
-    bash_task = BashOperator(
-        task_id="local_bash_task",
-        bash_command="echo This runs after the K8s pod"
-    )
-
-    print_env >> bash_task
+    print_env
