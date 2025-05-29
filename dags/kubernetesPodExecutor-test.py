@@ -33,7 +33,7 @@ with DAG(
         namespace="airflow",
         image="test-env-image:0.0.1",
         # image="python:3.9-slim",  # base image 就好
-        cmds=["sh", "-c"],
+        # cmds=["sh", "-c"],
         # arguments=["echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY"],
         secrets=[aws_access_key_id_secret, aws_secret_access_key_secret],
         get_logs=True,
