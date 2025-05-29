@@ -31,7 +31,7 @@ with DAG(
         task_id="print-env",
         name="print-env",
         namespace="airflow",
-        image="test-env-image:latest",
+        image="test-env-image:0.0.1",
         # image="python:3.9-slim",  # base image 就好
         cmds=["sh", "-c"],
         # arguments=["echo $AWS_ACCESS_KEY_ID && echo $AWS_SECRET_ACCESS_KEY"],
