@@ -22,7 +22,7 @@ with DAG(
         task_id='generate_fake_data',
         name='generate-fake-data',
         namespace='airflow',
-        image='your-dockerhub-username/fake-pos-data:latest',
+        image='generate-fake-data:0.0.1',
         image_pull_policy='IfNotPresent',
         is_delete_operator_pod=True,
         get_logs=True,
