@@ -1,7 +1,7 @@
+from datetime import datetime, timedelta
+
 from airflow import DAG
 from airflow.providers.cncf.kubernetes.operators.kubernetes_pod import KubernetesPodOperator
-from airflow.operators.bash import BashOperator
-from datetime import datetime, timedelta
 from airflow.kubernetes.secret import Secret
 
 
@@ -36,7 +36,7 @@ with DAG(
         task_id="upload-to-s3",
         name="upload-to-s3",
         namespace="airflow",
-        image="upload_s3:0.0.1",
+        image="upload-s3:0.0.1",
         secrets=[aws_access_key_id_secret, aws_secret_access_key_secret],
         get_logs=True,
         is_delete_operator_pod=True,
